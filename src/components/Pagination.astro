@@ -1,0 +1,86 @@
+---
+let { noOfPages, currentPage } = Astro.props;
+currentPage = currentPage * 1;
+noOfPages = noOfPages * 1;
+let mainArray = [...new Set()];
+let min = Math.max(1, currentPage-1);
+let max = Math.min(noOfPages, currentPage+1);
+if(min == noOfPages-1 && noOfPages > 2){
+    min--;
+}
+if(max == 2 && max+1 <= noOfPages){
+    max++;
+}
+for(let i = min; i<=max; i++){
+    mainArray.push(i);
+}
+---
+
+<div class="pagination">
+
+    <a href={`/blog/`} class={`${min > 1 ? "show" : "hide"}`}>
+        <div>1</div>
+    </a>
+
+    <span class={`${min > 2 ? "show" : "hide"}`}>...</span>
+
+    {mainArray.map(page => 
+        <a href={`/blog/${page===1?"":page}`}>
+            <div class={`page ${currentPage==page?"currentPage":""}`}>{page}</div>
+        </a>
+    )}
+
+    <span class={`${max < noOfPages - 1 ? "show" : "hide"}`}>...</span>
+
+    <a href={`/blog/${noOfPages}`} class={`${max < noOfPages ? "show" : "hide"}`}>
+        <div>{noOfPages}</div>
+    </a>
+    
+</div>
+
+
+<style>
+    .pagination{
+        display: flex;
+        width: 25rem;
+        height: 4.5rem;
+        column-gap: 1rem;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 20%;
+    }
+    .page{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+    span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 20%; 
+        border-radius: 0.5rem;
+    }
+    .currentPage{
+        background-color: aquamarine;
+    }
+    .hide{
+        visibility: hidden;
+    }
+    .show{
+        visibility: unset;
+    }
+</style>
