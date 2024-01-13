@@ -1,17 +1,30 @@
 ---
-import Social from "./Social.astro";
 ---
 
+<footer>
+    <div>
+        MIT License &#169; 2024 &nbsp; Harjas Sidhu
+    </div>
+</footer>
+
 <style>
-    footer {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
+    footer{
+        display: flex;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        height: 6rem;
+        padding: 2rem;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        color: white;
+        opacity: 0.6;
     }
 </style>
-
-<footer>
-    <Social platform="twitter" username="astrodotbuild" />
-    <Social platform="github" username="withastro" />
-    <Social platform="youtube" username="astrodotbuild" />
-</footer>

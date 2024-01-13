@@ -1,45 +1,220 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { Image } from "astro:assets";
+const { frontmatter} = Astro.props;
+const date = new Date(frontmatter.publishDate).toLocaleDateString();
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.publishDate.slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-  <ul>
-    {frontmatter.tags.map((tag: string) => <li>{tag}</li>)}
-  </ul>
-  <div class="tags">
-    {
-      frontmatter.tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{frontmatter.title}</title>
+</head>
+<body>
+    <Header />
+    <div class="full-page">
+        <Image src={frontmatter.image.url} width={300} height={300} alt="hero-blog" class="image"/>
+        <div class="content">
+           <section class="main-section">
+                <h1 class="heading">{frontmatter.title}</h1>
+                <p class="description">{frontmatter.description}</p>
+                <div class="rendered">
+                    <slot />
+                </div>
+           </section>
+           <section class="side-section">
+                <div class="date">
+                    <h1 class="datepub">
+                        Date published: {date}
+                    </h1>
+                </div>
+                <div>
+                    <h1 class="tags">Tags</h1>
+                    <div class="allTags">
+                        {frontmatter.tags.map(tag => <a href={`/tags/${tag}`} class="tag">{tag}</a>)}
+                    </div>
+                </div>
+           </section>
+        </div> 
+    </div>
+    <Footer />
+</body>
+</html>
+
+<style is:inline>
+    body{
+        background-color: #0d0f14;
+        grid-template-rows: auto 1fr auto;
     }
-  </div>
-  <slot />
-</BaseLayout>
-
-<style>
-  a {
-    color: #00539f;
-    text-decoration: none;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
-  }
+    .full-page{
+        display: flex;
+        width: 100%;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        padding: 0rem 10%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    header{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        box-shadow: 0 0 5rem 0.5rem #000000;
+        z-index: 10;
+    }
+    .image{
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        height: auto;
+        object-position: center;
+        position: relative;
+    }
+    .content{
+        display: grid;
+        width: 100%;
+        height: fit-content;
+        border-left: 1px inset #E5E7EB4A;
+        border-right: 1px outset #E5E7EB4A;
+        position: relative;
+    }
+    .main-section{
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        width: 100%;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        height: fit-content;
+    }
+    .para{
+        display: flex;
+        text-align: left;
+        width: 100%;
+        height: fit-content;
+        font-weight: 100;
+        color: #6b7280;
+        font-size: 1.3rem;
+        align-items: center;
+        justify-content: left;
+    }
+    .side-section{
+        border-left: 1px inset #E5E7EB4A;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        width: 28vw;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        height: 100%;
+    }
+    .heading{
+        color: white;
+        font-size: 3rem;
+        font-weight: 500;
+        text-align: left;
+        width: 100%;
+        height: fit-content;
+    }
+    .description{
+        font-size: 1.3rem;
+        font-weight: 100;
+        color: #6b7280;
+        overflow: hidden;
+        text-overflow: clip;
+        border-bottom: 1px outset #E5E7EB4A;
+        padding-bottom: 1rem;
+    }
+    .rendered{
+        padding-top: 2rem;
+        color: #6b7280;
+        display: flex;
+        width: 100%;
+        padding-right: 2rem;
+        line-height: 1.5;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    .rendered > p{
+        color: #6b7280;
+        font-size: 1.3rem;
+        padding: 0.2rem;
+    }
+    .rendered > h2{
+        color: #6b7280;
+        font-size: 1.5rem;
+    }
+    .rendered > ol{
+        height: fit-content;
+        width: 100%;
+        padding-left: 2rem;
+        color: #6b7280;
+        font-size: 1.2rem;
+        font-weight: 100;
+        line-height: 2;
+        list-style: none;
+    }
+    li{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+    }
+    li:before{
+        content: url('/list-style.svg');
+        position: absolute;
+        right: 1rem;
+        width: 100%;
+        height: 100%;
+    }
+    .rendered  a{
+        color: #6b7280;
+    }
+    .date{
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        padding: 2rem 0rem;
+        width: 100%;
+        height: fit-content;
+        color: #6b7280;
+    }
+    .datepub{
+        font-size: 1.3rem;
+    }
+    .tags{
+        color: white;
+        font-weight: 100;
+        display: flex;
+        height: fit-content;
+        padding-bottom: 1rem;
+    }
+    .allTags{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .tag{
+        display: flex;
+        width: 80%;
+        padding: 1rem 0rem;
+        color: #BFC1C9;
+        font-size: 100%;
+        font-weight: 100;
+        border-top: 1px solid #E5E7EB4A;
+        text-align: center;
+        text-decoration: none;
+        font-family: inter, sans-serif;
+        text-transform: capitalize;
+    }
+    footer{
+        border-top: 1px inset #E5E7EB4A;
+    }
 </style>

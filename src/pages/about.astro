@@ -1,65 +1,108 @@
 ---
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import MainSection from "../components/MainSection.astro";
 
 const pageTitle = "About Me";
-
-const identity = {
-  firstName: "Sarah",
-  country: "Canada",
-  occupation: "Technical Writer",
-  hobbies: ["photography", "birdwatching", "baseball"],
-};
-
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
-
-const happy = true;
-const finished = false;
-const goal = 3;
-
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} />
+<MainSection >
+    <h1 class="about-heading">
+        <span>OLA!</span> Wanna know about me?
+    </h1>
+    <p class="about-description">
+        My name is Harjas Sidhu and i am a script kiddie still fiddling around!<br />
+    </p>
+    <p class="para">
+        I still:
+    </p>
+    <ul>
+        <li>Search for language specific features</li>
+        <li>Use StackOverflow</li>
+        <li>am really bad at programming</li>
+        <li>hate writing tests</li>
+        <li>never wrote proper documentation of anything</li>
+    </ul>
+    <p class="para-2">
+        Still I am dumb enough to try and make everything myself and not use any extra package to learn how things are made.
 
-  <h2>... and my new Astro site!</h2>
+        I think that would be enough for you to know about my stubborness and foolishness!
+        What else can you even need to know?
+    </p>
+</MainSection>
 
-  <p>
-    My name is {identity.firstName} and i work as {identity.occupation} in {
-      identity.country
+<style>
+    .about-heading{
+        color: white;
+        font-size: 3rem;
+        font-weight: 500;
+        text-align: left;
+        width: 100%;
+        height: fit-content;
     }
-  </p>
-
-  {
-    identity.hobbies.length >= 2 && (
-      <p>
-        Two of hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
-      </p>
-    )
-  }
-
-  <p>My skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
-
-  {happy && <p>I am happy to be learning Astro!</p>}
-
-  {finished && <p>I finished this tutorial!</p>}
-
-  {goal === 3 ? (<p>My goal is to finish in 3 days.</p>) : (<p>My goal is not 3 days.</p>)}
-</BaseLayout>
-
-<style define:vars={{skillColor, fontWeight, textCase}}is:global>
-    h1{
-        color: purple;
-        font-size: 4rem;
+    span{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        background: linear-gradient(247.23deg,#4af2c8 0%,#2f4cb3 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 100;
     }
-    .skill{
-        color: var(--skillColor);
-        font-weight: var(--fontWeight);
-        text-transform: var(--textCase);
+    .about-description{
+        font-size: 1.3rem;
+        font-weight: 100;
+        color: #6b7280;
+        overflow: hidden;
+        text-overflow: clip;
+        border-bottom: 1px outset #E5E7EB4A;
+        padding-bottom: 1rem;
+        margin-top: -2.5rem;
+    }
+    .para{
+        display: flex;
+        text-align: left;
+        width: 100%;
+        height: fit-content;
+        font-weight: 100;
+        color: #6b7280;
+        font-size: 1.3rem;
+        align-items: center;
+        justify-content: left;
+    }
+    ul{
+        height: fit-content;
+        width: 100%;
+        padding-left: 2rem;
+        color: #6b7280;
+        font-size: 1.2rem;
+        font-weight: 100;
+        line-height: 2;
+        margin-top: -2rem;
+        list-style: none;
+    }
+    li{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+    }
+    li::before{
+        content: url('../images/list-style.svg');
+        position: absolute;
+        right: 1rem;
+        width: 100%;
+        height: 100%;
+    }
+    .para-2{
+        display: flex;
+        text-align: left;
+        width: 80%;
+        height: fit-content;
+        font-weight: 100;
+        color: #6b7280;
+        font-size: 1.2rem;
+        align-items: center;
+        justify-content: left;
     }
 </style>

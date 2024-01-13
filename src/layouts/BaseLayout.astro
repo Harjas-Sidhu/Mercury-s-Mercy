@@ -2,6 +2,9 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import HeroSection from '../components/HeroSection.astro';
+import SideSection from '../components/SideSection.astro';
+
 const {pageTitle} = Astro.props;
 ---
 
@@ -15,11 +18,16 @@ const {pageTitle} = Astro.props;
   </head>
   <body>
     <Header />
-    <h1>{pageTitle}</h1>
+    <HeroSection text="Welcome to Harjas's Blogs" />
+    <SideSection />
     <slot />
     <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
   </body>
 </html>
+
+<style is:global>
+    header{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+</style>

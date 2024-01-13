@@ -1,0 +1,30 @@
+---
+import MainSection from "../../components/MainSection.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const { message = "" } = Astro.props;
+---
+
+<BaseLayout pageTitle="Search the Blog">
+    <MainSection text={`Search results for: ${message}`}/>
+</BaseLayout>
+
+<script type="text/template" id="blogPost">
+    <a href={"/"+post.slug} class="blog-link">
+        <div class="blogPost">
+            <img src={post.data.image.url} alt="blog-hero" width="400" height="200" class="blog-image"></img>
+            <div class="post-handler">
+                <h1 class="title"></h1>
+                <p class="description"></p>
+            </div>
+            <div class="date-handler">
+                <div class="for-bar">
+                    <div class="date"></div>
+                </div>
+            </div>
+        </div>
+    </a>
+</script>
+
+<script>
+    import "../../scripts/search.js";
+</script>

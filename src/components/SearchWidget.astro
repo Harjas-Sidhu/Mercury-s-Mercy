@@ -1,0 +1,56 @@
+---
+
+---
+
+<aside>
+  <form>
+    <input
+      type="search"
+      placeholder="Search for a Blog"
+      id="search"
+      name="search"
+      max="12"
+    />
+  </form>
+</aside>
+
+<style>
+  aside {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    width: 100%;
+    height: 100%;
+  }
+  input {
+    display: flex;
+    padding: 0.85rem;
+    position: relative;
+    bottom: 1rem;
+    width: 100%;
+    background-color: rgb(35 38 45);
+    border: 1px solid #e5e7eb4a;
+    border-radius: 10px;
+    color: #6b7280;
+  }
+  input::placeholder {
+    color: #6b7280;
+    opacity: 1;
+  }
+
+  input::-ms-input-placeholder {
+    color: #6b7280;
+  }
+  input::-webkit-input-placeholder{
+    color: #6b7280;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  import "../scripts/searchwidget.js";
+</script>

@@ -1,0 +1,49 @@
+---
+import BlogPost from "./BlogPost.astro";
+import Pagination from "./Pagination.astro";
+const { page, posts, text } = Astro.props;
+---
+
+<section class="main-section">
+    {text && <h1 class="heading" id="heading">{text}</h1>}
+    <div class="post-container">
+        {posts && posts.map((post: any) => <BlogPost post={post} />)}
+        <slot />
+    </div>
+    {page && <Pagination noOfPages={page.lastPage} currentPage={page.currentPage} baseUrl="/" />}
+</section>
+
+
+<style>
+    .main-section{
+        position: relative;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        display: flex;
+        padding-left: 3rem;
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+        row-gap: 3rem;
+        flex-direction: column;
+        border-top: 1px inset #E5E7EB4A;
+        border-bottom: 1px outset #E5E7EB4A;
+        width: 75vw;
+    }
+    .heading{
+        font-size: 200%;
+        font-weight: 100;
+        color: white;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+    }
+    .post-container{
+        display: flex;
+        row-gap: 3rem;
+        flex-wrap: wrap;
+        column-gap: 1.5rem;
+        justify-content: flex-start;
+    }
+</style>

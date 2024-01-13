@@ -1,11 +1,68 @@
 ---
 import Navigation from "./Navigation.astro";
-import Hamburger from "./Hamburger.astro";
+import { Image } from "astro:assets";
+import Logo from "../images/logo.svg";
+import Instagram from "../images/instagram.svg";
+import LinkedIn from "../images/linkedin.svg";
+import Github from "../images/github.svg";
 ---
 
 <header>
+    <Image src={Logo} alt="astro-logo-pure-white" class="logo"/>
     <nav>
-        <Hamburger />
         <Navigation />
     </nav>
+    <nav class="socials">
+        <div class="nav-links social-container">
+            <a href="www.google.com"><Image src={Instagram} alt="instagram-logo" class="social-logo" />hello</a>
+            <a href="www.google.com"><Image src={LinkedIn} alt="linkedin-logo" class="social-logo" />hello</a>
+            <a href="www.google.com"><Image src={Github} alt="github-logo" class="social-logo" />hello</a>
+        </div>
+    </nav>
 </header>
+
+<style>
+    header{
+        display: flex;
+        height: 5rem;
+        width: 100%;
+        border-bottom: 1px outset #E5E7EB4A;
+    }
+    nav{
+        display: flex;
+        width: 50%;
+        height: 100%;
+    }
+    a{
+        font-size: 0;
+    }
+    .socials{
+        flex-direction: row-reverse;
+    }
+    .logo{
+        height: 5rem;
+        width: 7rem;
+        object-fit: contain;
+        margin-left: 2rem;
+    }
+    .social-container{
+        margin-right: 4rem;
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .social-container > a{
+        height: 3rem;
+        width: 3rem;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .social-logo{
+        aspect-ratio: 1;
+        object-fit: contain;
+        height: 2rem;
+    }
+</style>

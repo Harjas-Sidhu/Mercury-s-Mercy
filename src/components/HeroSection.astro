@@ -1,0 +1,31 @@
+---
+const { text } = Astro.props;
+---
+
+<section class="hero-section">
+    <h1>{text}</h1>
+</section>
+
+<style>
+    .hero-section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        z-index: -2;
+        mask-image: linear-gradient(to bottom,transparent,10%,white,90%,transparent);
+        background: url("../images/grid.png");
+        background-size: 100px 100px;
+        height: 30rem;
+    }
+    h1{
+        font-family: obviously, sans-serif;
+        font-size: 400%;
+        color: white;
+        word-break: keep-all;
+        width: 80%;
+        text-align: center;
+        font-weight: 100;
+    }
+</style>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPost from '../../components/BlogPost.astro';
+import MainSection from '../../components/MainSection.astro';
 
 export async function getStaticPaths() {
     const allPosts = await getCollection("posts");
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
     return uniqueTags.map(tag => {
         const posts = allPosts.filter(post => post.data.tags.includes(tag));
         return {
-            params : {tag,},
+            params: {tag,},
             props: {posts,},
         };
     });
@@ -20,8 +20,5 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-    <p>All posts conatining the tag: {tag}</p>
-    <ul>
-        {posts.map(post => <li><BlogPost link={`../blog/${post.slug}`} title={post.data.title} ></BlogPost></li>)}
-    </ul>
+    <MainSection text={`Blogs containg tag: ${tag}`} posts={posts} />
 </BaseLayout>

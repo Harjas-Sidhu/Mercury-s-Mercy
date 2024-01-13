@@ -2,11 +2,11 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 isDraft: false
 title: 'My First Blog Post'
-publishDate: 2022-07-01
+publishDate: 2023-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
 image:
-    url: 'https://docs.astro.build/assets/full-logo-dark.png'
+    url: 'https://docs.astro.build/assets/arc.webp'
     alt: 'The full Astro logo.'
 tags: ["astro", "blogging", "learning in public"]
 authorContact: 'harjassidhu1@gmail.com'

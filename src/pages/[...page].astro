@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import MainSection from "../components/MainSection.astro";
+
+export async function getStaticPaths({ paginate }) {
+    const allPosts = await getCollection("posts");
+    return paginate(allPosts, {
+        pageSize: 6,
+    });
+};
+
+const { page }: any = Astro.props;
+---
+
+<BaseLayout pageTitle="Blogs">
+    <MainSection posts={page.data} text="All Blogs" page={page} />
+</BaseLayout>

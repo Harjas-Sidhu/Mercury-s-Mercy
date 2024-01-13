@@ -1,5 +1,5 @@
 ---
-let { noOfPages, currentPage } = Astro.props;
+let { noOfPages, currentPage, baseUrl } = Astro.props;
 currentPage = currentPage * 1;
 noOfPages = noOfPages * 1;
 let mainArray = [...new Set()];
@@ -16,71 +16,76 @@ for(let i = min; i<=max; i++){
 }
 ---
 
-<div class="pagination">
+<section class="pagination">
 
-    <a href={`/blog/`} class={`${min > 1 ? "show" : "hide"}`}>
-        <div>1</div>
-    </a>
+    {min > 1 && <a href={baseUrl}>1</a>}
 
-    <span class={`${min > 2 ? "show" : "hide"}`}>...</span>
+    {min > 2 && <span>. . .</span>}
 
     {mainArray.map(page => 
-        <a href={`/blog/${page===1?"":page}`}>
-            <div class={`page ${currentPage==page?"currentPage":""}`}>{page}</div>
-        </a>
+        <a href={baseUrl+`${page===1?"":page}`} class={currentPage==page?"currentPage":""}>{page}</a>
     )}
 
-    <span class={`${max < noOfPages - 1 ? "show" : "hide"}`}>...</span>
+    {max < noOfPages-1 && <span>. . .</span>}
 
-    <a href={`/blog/${noOfPages}`} class={`${max < noOfPages ? "show" : "hide"}`}>
-        <div>{noOfPages}</div>
-    </a>
+    {max < noOfPages && <a href={baseUrl+`${noOfPages}`}>{noOfPages}</a>}
     
-</div>
+</section>
 
 
 <style>
     .pagination{
         display: flex;
-        width: 25rem;
-        height: 4.5rem;
-        column-gap: 1rem;
-        padding: 1rem;
+        width: 80%;
+        height: 7rem;
+        align-self: center;
+        padding: 0rem 2rem;
+        column-gap: 3rem;
         align-items: center;
         justify-content: center;
+        z-index: 5;
     }
     a{
+        position: relative;
+        color: white;
         text-decoration: none;
-        color: black;
         display: flex;
-        justify-content: center;
+        padding: 0.5rem;
+        height: 3rem;
+        width: 3rem;
+        text-align: center;
         align-items: center;
-        height: 100%;
-        width: 20%;
+        justify-content: center;
+        border-radius: 0.4rem;
     }
-    .page{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .currentPage:before{
+        position: absolute;
         height: 100%;
-        border-radius: 0.5rem;
         width: 100%;
+        content: "";
+        margin: -1px;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(247.23deg,#4af2c8 0%,#2f4cb3 100%);
+        z-index: -2;
+    }
+    .currentPage:after {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        border-radius: inherit;
+        background: #23262d linear-gradient(247.23deg,#4af2c833 0%,#2f4cb333 100%);
+    }
+    a:hover{
+        border: 1px solid white;
+    }
+    .currentPage:hover{
+        border: 0px;
     }
     span{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 20%; 
-        border-radius: 0.5rem;
-    }
-    .currentPage{
-        background-color: aquamarine;
-    }
-    .hide{
-        visibility: hidden;
-    }
-    .show{
-        visibility: unset;
+        color: white;
     }
 </style>

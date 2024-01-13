@@ -1,0 +1,31 @@
+---
+import SearchWidget from "./SearchWidget.astro";
+import SectionTags from "./SectionTags.astro";
+---
+
+<section class="side-section">
+    <SearchWidget />
+    <h1 class="tags">Tags</h1>
+    <SectionTags class="section-tags"/>
+</section>
+
+<style>
+    .side-section{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        display: flex;
+        padding: 3rem 2rem;
+        border-top: 1px inset #E5E7EB4A;
+        border-bottom: 1px outset #E5E7EB4A;
+        border-right: 1px outset #E5E7EB4A;
+        flex-direction: column;
+        row-gap: 1rem;
+        width: 25vw;
+    }
+    .tags{
+        color: white;
+        font-weight: 100;
+        display: flex;
+        height: fit-content;
+    }
+</style>
