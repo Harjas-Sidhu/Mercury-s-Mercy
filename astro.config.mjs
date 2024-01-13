@@ -1,9 +1,7 @@
 import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
-    image: {
-        service: {
-          entrypoint: 'astro/assets/services/noop',
-       },
-    },
+  output: 'hybrid',
+  adapter: vercel(),
 });
