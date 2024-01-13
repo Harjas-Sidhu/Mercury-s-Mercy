@@ -1,7 +1,7 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig, squooshImageService } from 'astro/config';
 
 export default defineConfig({
   image: {
-    service: passthroughImageService()
-  }
+    service: squooshImageService(),
+  },
 });
