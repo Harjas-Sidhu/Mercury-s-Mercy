@@ -8,7 +8,7 @@ author: 'Astro Learner'
 image:
     url: 'https://docs.astro.build/assets/arc.webp'
     alt: 'The full Astro logo.'
-tags: ["NodeJs", "WebSockets, "blogging", "learning in public"]
+tags: ["NodeJs", "WebSockets", "blogging", "learning in public"]
 authorContact: 'harjassidhu1@gmail.com'
 ---
 # Implementing WebSockets in NodeJS
